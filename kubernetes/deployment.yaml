@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eureka
+  labels:
+    app: eureka
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: eureka
+  template:
+    metadata:
+      labels:
+        app: eureka
+    spec:
+      containers:
+        - name: eureka #The name of the container
+          image: hemanth281/eureka:$BUILD_NUMBER #The Docker image
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8092
+              hostPort: 8092
+              hostIP: 0.0.0.0
+              protocol: "TCP"
+            - containerPort: 8761
+              hostPort: 8761
+              hostIP: 0.0.0.0
+              protocol: "TCP"
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "prod"
+            - name: TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: vault
+                  key: TOKEN
+
