@@ -48,7 +48,7 @@ pipeline {
             steps {
                 echo 'Pushing Docker image to Docker Hub...'
                 script {
-                    docker.withRegistry('https://registry-1.docker.io', 'dockerhub') {
+                    docker.withRegistry('https://registry-1.docker.io', 'd7a38cc9-4a4c-4ec5-ab6d-d0eda4763241') {
                         // Use the ID of the Jenkins credentials that store Docker Hub username and password
                         def dockerImage = docker.image("${dockerImageName}:${env.BUILD_NUMBER}")
                         dockerImage.push()
