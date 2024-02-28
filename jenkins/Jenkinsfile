@@ -9,7 +9,7 @@ pipeline {
 
     agent any
     environment {
-        dockerImageName = 'hemanth281/eureka'
+        dockerImageName = 'alvonellos/eureka'
         // Define your Docker image name
         kubernetesNamespace = 'eureka' // Update with your Kubernetes namespace
         kubeconfig = credentials("${params.clusterId}") // Use the ID of the Kubernetes credential
@@ -48,7 +48,7 @@ pipeline {
             steps {
                 echo 'Pushing Docker image to Docker Hub...'
                 script {
-                    docker.withRegistry('https://registry-1.docker.io', 'd7a38cc9-4a4c-4ec5-ab6d-d0eda4763241') {
+                    docker.withRegistry('https://registry-1.docker.io', 'dockerhub') {
                         // Use the ID of the Jenkins credentials that store Docker Hub username and password
                         def dockerImage = docker.image("${dockerImageName}:${env.BUILD_NUMBER}")
                         dockerImage.push()
