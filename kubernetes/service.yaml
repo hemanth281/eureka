@@ -4,7 +4,7 @@ metadata:
   name: eureka  #The name of the Kubernetes Service to be created in the Kubernetes cluster
 spec:
   selector:
-    app: interview
+    app: eureka
   type: LoadBalancer #Type of the Kubernetes Service
   externalIPs:
     - 192.168.0.92

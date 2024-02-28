@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: eureka #The name of the container
-          image: hemanth281/eureka:$BUILD_NUMBER #The Docker image
+          image: alvonellos/eureka:$BUILD_NUMBER #The Docker image
           imagePullPolicy: Always
           ports:
             - containerPort: 8092
